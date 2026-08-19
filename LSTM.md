@@ -102,7 +102,7 @@
 
 ## 6. 候选细胞状态
 
-候选细胞状态为： $\boxed{\tilde{C}_t = \tanh(W_{xc}x_t + W_{hc}h_{t-1} + b_c)}$
+候选细胞状态为： $`\boxed{\tilde{C}_t = \tanh(W_{xc}x_t + W_{hc}h_{t-1} + b_c)}`$
 
 其中：
 
