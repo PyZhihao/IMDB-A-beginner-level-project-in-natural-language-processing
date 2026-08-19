@@ -227,7 +227,7 @@ embedding_dim = 128
 
 ##### 当`batch_first=False`
 
-输入`x` 的 `Shape` 为： $\boxed{[\text{seq_len},\text{batch_size},\text{input_size}]}$
+输入`x` 的 `Shape` 为： $\boxed{[\text{seq\_len},\text{batch\_size},\text{input\_size}]}$
 
 例如：
 
