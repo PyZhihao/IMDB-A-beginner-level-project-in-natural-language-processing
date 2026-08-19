@@ -104,7 +104,7 @@ x3 → RNN → h3
 
 但实际上：所有时间步使用的是同一个 `RNN` 单元。
 
-也就是说，所有时间步共享同一套参数： $W_{xh}$，$W_{hh}$
+也就是说，所有时间步共享同一套参数： $W_{xh}$， $W_{hh}$
 
 这样做的好处是：
 
@@ -204,8 +204,7 @@ self.rnn = nn.RNN(
 
 ##### 当`batch_first=True`
 
-输入`x` 的 `Shape` 为： 
-$\boxed{[\text{batch_size},\text{seq_len},\text{input_size}]}$
+输入`x` 的 `Shape` 为： $\boxed{[\text{batch\_size},\text{seq\_len},\text{input\_size}]}$
 
 例如：
 
