@@ -2,7 +2,7 @@
 
 ## 1. RNN 是什么
 
-`RNN`，全称：$\text{Recurrent Neural Network}$，中文叫做：循环神经网络
+`RNN`，全称： $\text{Recurrent Neural Network}$ ，中文叫做：循环神经网络
 
 `RNN` 主要用于处理**序列数据**，例如：
 
