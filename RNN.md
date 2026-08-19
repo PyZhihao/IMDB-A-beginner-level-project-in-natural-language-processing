@@ -204,7 +204,7 @@ self.rnn = nn.RNN(
 
 ##### 当`batch_first=True`
 
-输入`x` 的 `Shape` 为： $\boxed{[\text{batch_size},\text{seq_len},\text{input_size}]}$
+输入`x` 的 `Shape` 为： $\boxed{[\text{batch_size}, \text{seq_len}, \text{input_size}]}$
 
 例如：
 
