@@ -488,6 +488,7 @@ $$
 ## 18. LSTM 的核心总结
 
 `LSTM` 的核心结构：
+
 $$
 f_t=\sigma(W_{xf}x_t+W_{hf}h_{t-1}+b_f)
 $$
