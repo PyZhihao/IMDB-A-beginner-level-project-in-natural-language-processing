@@ -2,11 +2,11 @@
 
 ## 1. GRU 是什么
 
-`GRU`，全称：$\text{Gated Recurrent Unit}$，中文叫做：门控循环单元
+`GRU`，全称： $\text{Gated Recurrent Unit}$，中文叫做：门控循环单元
 
 `GRU` 是一种用于处理**序列数据**的循环神经网络结构，改进传统 `RNN`。
 
-与 `RNN` 类似，`GRU` 也通过隐藏状态：$h_t$ 将之前的信息传递到当前时间步。
+与 `RNN` 类似，`GRU` 也通过隐藏状态： $h_t$ 将之前的信息传递到当前时间步。
 
 但 `GRU` 在隐藏状态更新过程中引入了**门控机制**：
 
@@ -17,9 +17,9 @@
 
 ## 2. 为什么需要 GRU
 
-传统 `RNN` 为：$h_t=\tanh(W_{xh}x_t+W_{hh}h_{t-1}+b_h)$
+传统 `RNN` 为： $h_t=\tanh(W_{xh}x_t+W_{hh}h_{t-1}+b_h)$
 
-每一个时间步都会直接根据：$x_t$ 和 $h_{t-1}$ 重新计算隐藏状态。
+每一个时间步都会直接根据： $x_t$ 和 $h_{t-1}$ 重新计算隐藏状态。
 
 也就是说，**传统 `RNN` 没有专门的机制决定哪些历史信息应该保留，哪些应该遗忘**。在长序列中，随着信息不断传递，早期的重要信息可能逐渐丢失。
 
@@ -38,96 +38,88 @@
 
 核心结构：
 
-1. 更新门：$z_t=\sigma(W_{xz}x_t+W_{hz}h_{t-1}+b_z)$
-2. 重置门：$r_t=\sigma(W_{xr}x_t+W_{hr}h_{t-1}+b_r)$
-3. 候选隐藏状态：$\tilde h_t=\tanh\left(W_{xh}x_t+W_{hh}(r_t\odot h_{t-1})+b_h\right)$
-4. 当前隐藏状态：$h_t=z_t\odot h_{t-1}+(1-z_t)\odot\tilde h_t$
+1. 更新门： $z_t=\sigma(W_{xz}x_t+W_{hz}h_{t-1}+b_z)$
+2. 重置门： $r_t=\sigma(W_{xr}x_t+W_{hr}h_{t-1}+b_r)$
+3. 候选隐藏状态： $\tilde h_t=\tanh\left(W_{xh}x_t+W_{hh}(r_t\odot h_{t-1})+b_h\right)$
+4. 当前隐藏状态： $h_t=z_t\odot h_{t-1}+(1-z_t)\odot\tilde h_t$
 
 ------
 
 ## 4. 更新门（Update Gate）
 
-更新门：$\boxed{
-z_t=\sigma(W_{xz}x_t+W_{hz}h_{t-1}+b_z)
-}$
+更新门： $\boxed{z_t=\sigma(W_{xz}x_t+W_{hz}h_{t-1}+b_z)}$
 
 其中：
 
 - $x_t$：当前时间步输入
 - $h_{t-1}$：上一时间步隐藏状态
-- $W_{xz}$、$W_{hz}$：可学习权重参数
+- $W_{xz}$、 $W_{hz}$：可学习权重参数
 - $b_z$：可学习偏置参数
 - $\sigma$：`Sigmoid` 激活函数
 
-`Sigmoid` 的输出范围为：$0<z_t<1$，因此更新门可以看成一个比例系数。
+`Sigmoid` 的输出范围为： $0<z_t<1$，因此更新门可以看成一个比例系数。
 
-更新门的主要作用：**控制保留多少上一时间步隐藏状态 $h_{t-1}$ 和当前时间步候选隐藏状态 $\tilde h_t$ 信息进入当前时间步隐藏状态$h_{t}$**
+更新门的主要作用：**控制保留多少上一时间步隐藏状态 $h_{t-1}$ 和当前时间步候选隐藏状态 $\tilde h_t$ 信息进入当前时间步隐藏状态 $h_{t}$**
 
 ------
 
 ## 5. 重置门（Reset Gate）
 
-重置门：$\boxed{
-r_t=\sigma(W_{xr}x_t+W_{hr}h_{t-1}+b_r)
-}$
+重置门： $\boxed{r_t=\sigma(W_{xr}x_t+W_{hr}h_{t-1}+b_r)}$
 
 其中：
 
 - $x_t$：当前时间步输入
 - $h_{t-1}$：上一时间步隐藏状态
-- $W_{xr}$、$W_{hr}$：可学习权重参数
+- $W_{xr}$、 $W_{hr}$：可学习权重参数
 - $b_r$：可学习偏置参数
 - $\sigma$：`Sigmoid` 激活函数
 
-同样：$0<r_t<1$
+同样： $0<r_t<1$
 
-重置门的主要作用：**控制保留多少上一时间步隐藏状态 $h_{t-1}$ 进入当前时间步候选隐藏状态$\tilde h_t$**
+重置门的主要作用：**控制保留多少上一时间步隐藏状态 $h_{t-1}$ 进入当前时间步候选隐藏状态 $\tilde h_t$**
 
 ------
 
 ## 6. 候选隐藏状态
 
-得到重置门之后，计算候选隐藏状态：$ \boxed{ \tilde h_t = \tanh\left(W_{xh}x_t+W_{hh}(r_t\odot h_{t-1})+b_h\right)}$
+得到重置门之后，计算候选隐藏状态： $\boxed{\tilde h_t = \tanh\left(W_{xh}x_t+W_{hh}(r_t\odot h_{t-1})+b_h\right)}$
 
-这里最重要的是：$r_t\odot h_{t-1}$，也就是说：**GRU 不会直接使用全部历史信息计算新的候选状态，而是先通过重置门进行筛选。**
+这里最重要的是： $r_t\odot h_{t-1}$，也就是说：**GRU 不会直接使用全部历史信息计算新的候选状态，而是先通过重置门进行筛选。**
 
-因此：$\tilde h_t$可以理解为：**根据当前输入和筛选后的历史信息得到的“新的候选信息”。**
+因此： $\tilde h_t$ 可以理解为：**根据当前输入和筛选后的历史信息得到的“新的候选信息”。**
 
 ------
 
 ## 7. 当前隐藏状态
 
-得到候选隐藏状态之后，需要计算当前的隐藏状态：$\boxed{ h_t=z_t\odot h_{t-1}+(1-z_t)\odot \tilde h_t}$
+得到候选隐藏状态之后，需要计算当前的隐藏状态： $\boxed{h_t=z_t\odot h_{t-1}+(1-z_t)\odot \tilde h_t}$
 
-**保留旧信息**：$z_t\odot h_{t-1}$
+**保留旧信息**： $z_t\odot h_{t-1}$
 
-**加入新信息**：$(1-z_t)\odot\tilde h_t$
+**加入新信息**： $(1-z_t)\odot\tilde h_t$
 
 ------
 
 ## 8. 如何理解更新门和重置门
 
-重置门：$r_t$，用于计算候选隐藏状态：$ \tilde h_t = \tanh\left(W_{xh}x_t+W_{hh}(r_t\odot h_{t-1})+b_h\right)$。
+重置门： $r_t$，用于计算候选隐藏状态： $\tilde h_t = \tanh\left(W_{xh}x_t+W_{hh}(r_t\odot h_{t-1})+b_h\right)$。
 
-**重置门决定的是当前时间步候选隐藏状态$\tilde h_t$中保留上一时间步隐藏状态$h_{t-1}$的多少**
+**重置门决定的是当前时间步候选隐藏状态 $\tilde h_t$ 中保留上一时间步隐藏状态 $h_{t-1}$ 的多少**
 
-当$r_t\approx0$，此时：$r_t\odot h_{t-1}\approx0$，说明主要保留当前信息，基本忽略旧隐藏状态的信息。
+当 $r_t\approx0$，此时： $r_t\odot h_{t-1}\approx0$，说明主要保留当前信息，基本忽略旧隐藏状态的信息。
 
-当$r_t\approx1$，此时：$r_t\odot h_{t-1}\approx h_{t-1}$，说明主要保留旧隐藏状态的信息，基本忽略当前信息。
+当 $r_t\approx1$，此时： $r_t\odot h_{t-1}\approx h_{t-1}$，说明主要保留旧隐藏状态的信息，基本忽略当前信息。
 
 
 
-更新门：$z_t$，用于计算当前隐藏状态：$h_t=z_t\odot h_{t-1}+(1-z_t)\odot \tilde h_t$。
+更新门： $z_t$，用于计算当前隐藏状态： $h_t=z_t\odot h_{t-1}+(1-z_t)\odot \tilde h_t$。
 
-**更新门决定的是当前时间步隐藏状态中$h_{t}$保留上一时间步隐藏状态 $h_{t-1}$ 和当前时间步候选隐藏状态 $\tilde h_t$ 的比例**
+**更新门决定的是当前时间步隐藏状态中 $h_{t}$ 保留上一时间步隐藏状态 $h_{t-1}$ 和当前时间步候选隐藏状态 $\tilde h_t$ 的比例**
 
-当 $z_t\approx0$，此时：$1-z_t\approx1$，即$h_t
-\approx
-\tilde h_t$，说明主要使用当前新候选隐藏状态的信息，较少保留旧隐藏状态的信息。
+当 $z_t\approx0$，此时： $1-z_t\approx1$，即 $h_t\approx\tilde h_t$，说明主要使用当前新候选隐藏状态的信息，较少保留旧隐藏状态的信息。
 
-当 $z_t\approx1$，此时：$1-z_t\approx0$，即$h_t
-\approx
-h_{t-1}$，说明主要保留旧隐藏状态的信息，很少加入当前新候选隐藏状态的信息。
+当 $z_t\approx1$，此时： $1-z_t\approx0$，即 $h_t\approx h_{t-1}$，说明主要保留旧隐藏状态的信息，很少加入当前新候选隐藏状态的信息。
 
 ------
 
@@ -135,21 +127,21 @@ h_{t-1}$，说明主要保留旧隐藏状态的信息，很少加入当前新候
 
 给定：当前时间步输入 $x_t$ 和上一时间步隐藏状态 $h_{t-1}$
 
-第一步：计算更新门：$z_t=\sigma(W_{xz}x_t+W_{hz}h_{t-1}+b_z)$
+第一步：计算更新门： $z_t=\sigma(W_{xz}x_t+W_{hz}h_{t-1}+b_z)$
 
-第二步：计算重置门：$r_t=\sigma(W_{xr}x_t+W_{hr}h_{t-1}+b_r)$
+第二步：计算重置门： $r_t=\sigma(W_{xr}x_t+W_{hr}h_{t-1}+b_r)$
 
-第三步：计算候选隐藏状态：$\tilde h_t=\tanh\left(W_{xh}x_t+W_{hh}(r_t\odot h_{t-1})+b_h\right)$
+第三步：计算候选隐藏状态： $\tilde h_t=\tanh\left(W_{xh}x_t+W_{hh}(r_t\odot h_{t-1})+b_h\right)$
 
-第四步：计算当前隐藏状态：$h_t=z_t\odot h_{t-1}+(1-z_t)\odot\tilde h_t$
+第四步：计算当前隐藏状态： $h_t=z_t\odot h_{t-1}+(1-z_t)\odot\tilde h_t$
 
 ------
 
 ## 10. GRU 如何处理整个序列
 
-假设输入序列：$x_1,x_2,x_3,\cdots,x_T$
+假设输入序列： $x_1,x_2,x_3,\cdots,x_T$
 
-首先初始化 $h_0$，一般初始化为全$0$
+首先初始化 $h_0$，一般初始化为全 $0$
 
 然后随时间步进行隐藏状态的更新：
 $$
@@ -183,7 +175,7 @@ x3 → GRU → h3
 xT → GRU → hT
 ```
 
-每一个时间步内部都会计算：更新门$z_t$；重置门$r_t$；候选隐藏状态$\tilde h_t$；当前隐藏状态$h_t$。
+每一个时间步内部都会计算：更新门 $z_t$；重置门 $r_t$；候选隐藏状态 $\tilde h_t$；当前隐藏状态 $h_t$。
 
 ------
 
@@ -240,7 +232,7 @@ self.gru = nn.GRU(
 
 ##### 当设置 `batch_first=True` 
 
-输入 `x` 的 `Shape`：$\boxed{[\text{batch_size},\text{seq_len},\text{input_size}]}$
+输入 `x` 的 `Shape`： $\boxed{[\text{batch\_size},\text{seq\_len},\text{input\_size}]}$
 
 例如：
 
@@ -262,7 +254,7 @@ embedding_dim = 128
 
 ##### 当设置`batch_first=False`
 
-输入`x` 的 `Shape` 为：$\boxed{[\text{seq_len},\text{batch_size},\text{input_size}]}$
+输入`x` 的 `Shape` 为： $\boxed{[\text{seq\_len},\text{batch\_size},\text{input\_size}]}$
 
 例如：
 
@@ -307,9 +299,7 @@ h_n
 
 ### 14.1 output
 
-当`batch_first=True`，且为单向 `GRU` 时，`output`的`shape`为：$\boxed{
-[\text{batch_size},\text{seq_len},\text{hidden_size}]
-}$
+当`batch_first=True`，且为单向 `GRU` 时，`output`的`shape`为： $\boxed{[\text{batch\_size},\text{seq\_len},\text{hidden\_size}]}$
 
 例如：
 
@@ -317,25 +307,23 @@ h_n
 [32, 200, 128]
 ```
 
-`output` 表示：**最后一层 GRU 在所有时间步产生的隐藏状态。**也就是：$[h_1,h_2,\cdots,h_T]$
+`output` 表示：**最后一层 GRU 在所有时间步产生的隐藏状态。**也就是： $[h_1,h_2,\cdots,h_T]$
 
-例如：`output[:, 0, :]` 表示最后一层第一个时间步的隐藏状态：$h_1$
+例如：`output[:, 0, :]` 表示最后一层第一个时间步的隐藏状态： $h_1$
 
-`output[:, -1, :]`，表示最后一层最后一个时间步的隐藏状态：$h_T$
+`output[:, -1, :]`，表示最后一层最后一个时间步的隐藏状态： $h_T$
 
 ---
 
 ### 14.2 `h_n`
 
-`h_n` 的`shape` 为：$\boxed{
-[\text{num_layers},\text{batch_size},\text{hidden_size}]
-}$
+`h_n` 的`shape` 为： $\boxed{[\text{num\_layers},\text{batch\_size},\text{hidden\_size}]}$
 
 例如：`[2, 32, 128]`
 
 `h_n` 表示：**每一层 GRU 在最后一个时间步的隐藏状态。**
 
-例如：`h_n[-1]`表示：最后一层 `GRU` 在最后一个时间步的隐藏状态，`shape`为：$\boxed{[\text{batch_size},\text{hidden_size}]}$
+例如：`h_n[-1]`表示：最后一层 `GRU` 在最后一个时间步的隐藏状态，`shape`为： $\boxed{[\text{batch\_size},\text{hidden\_size}]}$
 
 ---
 
@@ -343,13 +331,11 @@ h_n
 
 如果：`num_layers=2`，那么就是两层 `GRU`。
 
-第一层：$x_t \rightarrow h_t^{(1)}$
+第一层： $x_t \rightarrow h_t^{(1)}$
 
-第二层接收第一层的输出：$h_t^{(1)}
-\rightarrow
-h_t^{(2)}$
+第二层接收第一层的输出： $h_t^{(1)}\rightarrow h_t^{(2)}$
 
-每一层还会维护自己的历史隐藏状态：$h_t^{(1)}=f(x_t,h_{t-1}^{(1)})$；$ h_t^{(2)}=f(h_t^{(1)},h_{t-1}^{(2)})$
+每一层还会维护自己的历史隐藏状态： $h_t^{(1)}=f(x_t,h_{t-1}^{(1)})$； $h_t^{(2)}=f(h_t^{(1)},h_{t-1}^{(2)})$
 
 ```text
              时间方向 →

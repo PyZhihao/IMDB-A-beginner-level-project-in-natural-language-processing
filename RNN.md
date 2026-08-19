@@ -58,7 +58,7 @@ $\boxed{h_t=\tanh(W_{xh}x_t+W_{hh}h_{t-1}+b_h)}$
 
 一直到： $h_T=f(x_T,h_{T-1})$
 
-其中： $h_0$为初始隐藏状态，一般初始化为全 $0$。
+其中： $h_0$ 为初始隐藏状态，一般初始化为全 $0$。
 
 整体过程可以表示为：
 
@@ -86,7 +86,7 @@ $h_t=f(x_t,h_{t-1})$
 
 继续展开： $h_t=f(x_t,f(x_{t-1},f(x_{t-2},\cdots)))$
 
-因此： $h_t$会受到： $x_1,x_2,\cdots,x_t$的影响。
+因此： $h_t$ 会受到： $x_1,x_2,\cdots,x_t$ 的影响。
 
 所以可以记为：**截至当前位置的序列信息表示**
 
@@ -263,7 +263,7 @@ h_n
 
 ### 10.1 `output`
 
-对于单向 `RNN` ，`output`的`shape`为： $\boxed{[\text{batch_size},\text{seq_len},\text{hidden_size}]}$
+对于单向 `RNN` ，`output`的`shape`为： $\boxed{[\text{batch\_size},\text{seq\_len},\text{hidden\_size}]}$
 
 例如：`[32, 200, 128]`
 
@@ -277,13 +277,13 @@ h_n
 
 ### 10.2 `h_n`
 
-`h_n` 的`shape` 为： $\boxed{[\text{num_layers},\text{batch_size},\text{hidden_size}]}$
+`h_n` 的`shape` 为： $\boxed{[\text{num\_layers},\text{batch\_size},\text{hidden\_size}]}$
 
 例如：`[2, 32, 128]`
 
 `h_n` 表示：**每一层 `RNN` 在最后一个时间步的隐藏状态**。
 
-例如：`h_n[-1]`表示：最后一层 `RNN` 的最后一个时间步的隐藏状态，`shape`为： $\boxed{[\text{batch_size},\text{hidden_size}]}$
+例如：`h_n[-1]`表示：最后一层 `RNN` 的最后一个时间步的隐藏状态，`shape`为： $\boxed{[\text{batch\_size},\text{hidden\_size}]}$
 
 ------
 
@@ -291,11 +291,11 @@ h_n
 
 如果：`num_layers=2`，那么就是两层 `RNN`。
 
-第一层： $x_t\rightarrowh_t^{(1)}$
+第一层： $x_t\rightarrow h_t^{(1)}$
 
-第二层接收第一层的输出： $h_t^{(1)}\rightarrowh_t^{(2)}$
+第二层接收第一层的输出： $h_t^{(1)}\rightarrow h_t^{(2)}$
 
-每一层还会维护自己的历史隐藏状态： $h_t^{(1)}=f(x_t,h_{t-1}^{(1)})$；$ h_t^{(2)}=f(h_t^{(1)},h_{t-1}^{(2)})$
+每一层还会维护自己的历史隐藏状态： $h_t^{(1)}=f(x_t,h_{t-1}^{(1)})$； $h_t^{(2)}=f(h_t^{(1)},h_{t-1}^{(2)})$
 
 ```text
              时间方向 →
@@ -340,7 +340,7 @@ h2
 h1
 ```
 
-这种方式称为：`Backpropagation Through Time`，简称：$\boxed{\text{BPTT}}$
+这种方式称为：`Backpropagation Through Time`，简称： $\boxed{\text{BPTT}}$
 
 ------
 
