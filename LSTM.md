@@ -192,7 +192,7 @@
 
 第二步：计算输入门： $i_t=\sigma(W_{xi}x_t+W_{hi}h_{t-1}+b_i)$
 
-第三步：计算候选细胞状态： $\tilde{C}_t=\tanh(W_{xc}x_t+W_{hc}h_{t-1}+b_c)$
+第三步：计算候选细胞状态： $`\tilde{C}_t=\tanh(W_{xc}x_t+W_{hc}h_{t-1}+b_c)`$
 
 第四步：更新当前细胞状态： $C_t=f_t\odot C_{t-1}+i_t\odot\tilde{C}_t$
 
