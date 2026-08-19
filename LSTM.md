@@ -54,13 +54,14 @@
 
 2. 输入门： $i_t=\sigma(W_{xi}x_t+W_{hi}h_{t-1}+b_i)$
 
-3. 候选细胞状态： $\tilde{C}_t=\tanh(W_{xc}x_t+W_{hc}h_{t-1}+b_c)$
+3. 候选细胞状态： $\tilde{C}_t=
+4. \tanh(W_{xc}x_t+W_{hc}h_{t-1}+b_c)$
 
-4. 当前细胞状态： $C_t=f_t\odot C_{t-1}+i_t\odot\tilde{C}_t$
+5. 当前细胞状态： $C_t=f_t\odot C_{t-1}+i_t\odot\tilde{C}_t$
 
-5. 输出门： $o_t=\sigma(W_{xo}x_t+W_{ho}h_{t-1}+b_o)$
+6. 输出门： $o_t=\sigma(W_{xo}x_t+W_{ho}h_{t-1}+b_o)$
 
-6. 当前隐藏状态： $h_t=o_t\odot\tanh(C_t)$
+7. 当前隐藏状态： $h_t=o_t\odot\tanh(C_t)$
 
 ---
 
