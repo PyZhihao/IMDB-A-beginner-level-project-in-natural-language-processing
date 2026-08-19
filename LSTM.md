@@ -291,7 +291,11 @@ self.lstm = nn.LSTM(
 
 ##### 当设置 `batch_first=True`
 
-输入 `x` 的 `Shape`： $[\text{batch\_size},\text{seq\_len},\text{input\_size}]$
+输入 `x` 的 `Shape`：
+
+$$
+[\mathrm{batch\_size},\mathrm{seq\_len},\mathrm{input\_size}]
+$$
 
 例如：
 
@@ -317,7 +321,11 @@ embedding_dim = 128
 
 ##### 当设置 `batch_first=False`
 
-输入 `x` 的 `Shape` 为： $[\text{seq\_len},\text{batch\_size},\text{input\_size}]$
+输入 `x` 的 `Shape` 为：
+
+$$
+[\mathrm{seq\_len},\mathrm{batch\_size},\mathrm{input\_size}]
+$$
 
 例如：
 
@@ -367,7 +375,11 @@ c_n
 
 ### 15.1 `output`
 
-当 `batch_first=True`，且为单向 `LSTM` 时，`output`的`shape`为： $[\text{batch\_size},\text{seq\_len},\text{hidden\_size}]$
+当 `batch_first=True`，且为单向 `LSTM` 时，`output`的`shape`为：
+
+$$
+[\mathrm{batch\_size},\mathrm{seq\_len},\mathrm{hidden\_size}]
+$$
 
 例如：
 
@@ -387,7 +399,11 @@ c_n
 
 ### 15.2 `h_n`
 
-`h_n` 的 `Shape` 为： $[\text{num\_layers},\text{batch\_size},\text{hidden\_size}]$
+`h_n` 的 `Shape` 为：
+
+$$
+[\mathrm{num\_layers},\mathrm{batch\_size},\mathrm{hidden\_size}]
+$$
 
 例如：
 
@@ -403,7 +419,11 @@ c_n
 
 ### 15.3 `c_n`
 
-`c_n` 的 `Shape` 为： $[\text{num\_layers},\text{batch\_size},\text{hidden\_size}]$
+`c_n` 的 `Shape` 为：
+
+$$
+[\mathrm{num\_layers},\mathrm{batch\_size},\mathrm{hidden\_size}]
+$$
 
 例如：
 

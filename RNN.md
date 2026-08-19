@@ -204,7 +204,11 @@ self.rnn = nn.RNN(
 
 ##### 当`batch_first=True`
 
-输入`x` 的 `Shape` 为： $\boxed{[\text{batch\_size},\text{seq\_len},\text{input\_size}]}$
+输入`x` 的 `Shape` 为：
+
+$$
+\boxed{[\mathrm{batch\_size},\mathrm{seq\_len},\mathrm{input\_size}]}
+$$
 
 例如：
 
@@ -226,7 +230,11 @@ embedding_dim = 128
 
 ##### 当`batch_first=False`
 
-输入`x` 的 `Shape` 为： $\boxed{[\text{seq\_len},\text{batch\_size},\text{input\_size}]}$
+输入`x` 的 `Shape` 为：
+
+$$
+\boxed{[\mathrm{seq\_len},\mathrm{batch\_size},\mathrm{input\_size}]}
+$$
 
 例如：
 
@@ -263,7 +271,11 @@ h_n
 
 ### 10.1 `output`
 
-对于单向 `RNN` ，`output`的`shape`为： $\boxed{[\text{batch\_size},\text{seq\_len},\text{hidden\_size}]}$
+对于单向 `RNN` ，`output`的`shape`为：
+
+$$
+\boxed{[\mathrm{batch\_size},\mathrm{seq\_len},\mathrm{hidden\_size}]}
+$$
 
 例如：`[32, 200, 128]`
 
@@ -277,13 +289,21 @@ h_n
 
 ### 10.2 `h_n`
 
-`h_n` 的`shape` 为： $\boxed{[\text{num\_layers},\text{batch\_size},\text{hidden\_size}]}$
+`h_n` 的`shape` 为：
+
+$$
+\boxed{[\mathrm{num\_layers},\mathrm{batch\_size},\mathrm{hidden\_size}]}
+$$
 
 例如：`[2, 32, 128]`
 
 `h_n` 表示：**每一层 `RNN` 在最后一个时间步的隐藏状态**。
 
-例如：`h_n[-1]`表示：最后一层 `RNN` 的最后一个时间步的隐藏状态，`shape`为： $\boxed{[\text{batch\_size},\text{hidden\_size}]}$
+例如：`h_n[-1]`表示：最后一层 `RNN` 的最后一个时间步的隐藏状态，`shape`为：
+
+$$
+\boxed{[\mathrm{batch\_size},\mathrm{hidden\_size}]}
+$$
 
 ------
 
