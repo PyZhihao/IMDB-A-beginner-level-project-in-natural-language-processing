@@ -22,6 +22,7 @@
 ├── main_rnn.py           # RNN 训练入口
 ├── main_gru.py           # GRU 训练入口
 ├── main_lstm.py          # LSTM 训练入口
+├── inference.py          # 使用 GRU 3 层模型进行预测
 ├── RNN.md                # RNN 原理笔记
 ├── GRU.md                # GRU 原理笔记
 ├── LSTM.md               # LSTM 原理笔记
@@ -137,6 +138,17 @@ python main_gru.py
 4. 根据最低验证集 loss 保存最优模型
 5. 加载最优模型
 6. 在测试集上输出最终结果
+
+如果只想使用已经训练好的 `GRU 3 layers` 模型进行预测，可以运行：
+
+```bash
+python inference.py
+```
+
+预测脚本会加载：
+
+- `best_model/best_model_gru_3.pt`
+- `best_model/vocab.pkl`
 
 ## 实验结果
 

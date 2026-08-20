@@ -96,3 +96,49 @@ def plot_loss(train_losses, val_losses, layers, save_dir, model_name):
     plt.tight_layout()
     plt.savefig(save_path, dpi=400)
     plt.show()
+
+
+def predict(model, texts, vocab, tokenizer, device, max_len=256):
+    """对文本（单条/多条）进行情感分类预测"""
+    model.eval()
+
+    # 单条文本转为列表
+    if isinstance(texts, str):
+        texts = [texts]
+
+    token_ids_list = []
+    lengths = []
+
+    # 文本预处理
+    for text in texts:
+        token_ids = tokenizer(text)  # text -> tokens
+        token_ids = [vocab[token] for token in token_ids]  # tokens -> ids
+        token_ids = token_ids[:max_len]  # 截断
+        length = len(token_ids)  # 真实长度
+        if length == 0:  # 空文本处理
+            token_ids = [vocab.unk]
+            length = 1
+        if length < max_len:  # padding
+            token_ids += [vocab.pad] * (max_len - length)
+
+        token_ids_list.append(token_ids)
+        lengths.append(length)
+
+    x = torch.tensor(token_ids_list, dtype=torch.long)
+    x = x.to(device)
+    lengths = torch.tensor(lengths, dtype=torch.long)
+    lengths = lengths.to(device)
+
+
+    with torch.no_grad():
+        logits = model(x, lengths)
+        probs = torch.sigmoid(logits)
+
+    probs = probs.cpu().numpy()
+
+    results = []
+    for prob in probs:
+        label = ("positive" if prob > 0.5 else "negative")
+        results.append({"label": label, "probability": prob})
+
+    return results
