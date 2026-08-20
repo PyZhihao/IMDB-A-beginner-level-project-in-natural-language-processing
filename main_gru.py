@@ -1,4 +1,5 @@
 import os
+import pickle
 
 import torch
 from torch import nn
@@ -54,6 +55,8 @@ if __name__ == "__main__":
 
     vocab = Vocab(train_texts_split, min_freq=2, max_size=max_vocab_size)  # 只使用真正的训练集构建 Vocab
     print(f"vocab size: {len(vocab)}")
+    with open("best_model/vocab.pkl", "wb") as f:
+        pickle.dump(vocab, f)
 
     train_dataset = IMDBDataset(train_texts_split, train_labels_split, vocab, max_len=max_len)
     val_dataset = IMDBDataset(val_texts_split, val_labels_split, vocab, max_len=max_len)
