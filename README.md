@@ -11,15 +11,23 @@
 
 ```text
 .
-├── aclImdb/              # IMDB 数据集
-├── main_rnn.py           # RNN 情感分类模型
-├── main_lstm.py          # LSTM 情感分类模型
-├── main_gru.py           # GRU 情感分类模型
+├── data.py               # 数据读取、分词、Dataset
+├── vocab.py              # Vocabulary
+├── utils.py              # seed、train、evaluate、checkpoint
+├── models/
+│   ├── __init__.py
+│   ├── rnn.py
+│   ├── gru.py
+│   └── lstm.py
+├── main_rnn.py           # RNN 训练入口
+├── main_gru.py           # GRU 训练入口
+├── main_lstm.py          # LSTM 训练入口
 ├── RNN.md                # RNN 原理笔记
-├── LSTM.md               # LSTM 原理笔记
 ├── GRU.md                # GRU 原理笔记
-├── best_model/           # 最优模型参数
-└── loss_curve/           # 训练集和验证集 loss 曲线
+├── LSTM.md               # LSTM 原理笔记
+├── README.md
+├── requirements.txt
+└── .gitignore
 ```
 
 ## 数据准备
