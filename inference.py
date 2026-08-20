@@ -34,9 +34,9 @@ def main():
     for text, result in zip(texts, results):
         print("=" * 50)
 
-        print(f"Text:\n{text}")
-        print(f"Prediction:\n{result['label']}")
-        print(f"Probability:\n{result['probability']:.4f}")
+        print(f"Text: {text}")
+        print(f"Prediction: {result['label']}")
+        print(f"Probability: {result['probability']:.4f}")
 
 if __name__ == "__main__":
     main()

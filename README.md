@@ -224,24 +224,15 @@ texts = ["This movie is fantastic. The story is amazing.",
 预测结果：
 
 ```text
-Text:
-This movie is fantastic. The story is amazing.
-Prediction:
-positive
-Probability:
-0.9935
+Text: This movie is fantastic. The story is amazing.
+Prediction: positive
+Probability: 0.9935
 
-Text:
-This is the worst movie, I have ever watched.
-Prediction:
-negative
-Probability:
-0.0045
+Text: This is the worst movie, I have ever watched.
+Prediction: negative
+Probability: 0.0045
 
-Text:
-The movie is acceptable, but nothing special.
-Prediction:
-negative
-Probability:
-0.2239
+Text: The movie is acceptable, but nothing special.
+Prediction: negative
+Probability: 0.2239
 ```
