@@ -26,7 +26,6 @@
 ├── GRU.md                # GRU 原理笔记
 ├── LSTM.md               # LSTM 原理笔记
 ├── README.md
-├── requirements.txt
 └── .gitignore
 ```
 
@@ -115,7 +114,14 @@ Linear
 
 ## 运行方式
 
-安装 PyTorch 后，在项目根目录运行：
+本项目使用 `conda` 创建 `Python 3.10` 虚拟环境，并安装以下依赖包：
+
+```bash
+pip install torch==2.5.1+cu121 --extra-index-url https://download.pytorch.org/whl/cu121
+pip install matplotlib==3.10.9
+```
+
+安装好环境后，在项目根目录运行：
 
 ```bash
 python main_rnn.py
