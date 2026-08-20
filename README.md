@@ -197,3 +197,51 @@ RNN 结构简单，但长序列中容易丢失早期信息。
 LSTM 通过输入门、遗忘门、输出门和细胞状态增强了长期依赖建模能力。
 
 GRU 用更简洁的门控结构实现了类似 LSTM 的效果，在本实验中取得了更好的性能和泛化表现。
+
+## 预测示例
+
+项目提供了 `inference.py` 用于加载已经训练好的 `GRU 3 layers` 模型进行预测。
+
+运行命令：
+
+```bash
+python inference.py
+```
+
+预测脚本会加载：
+
+- `best_model/best_model_gru_3.pt`
+- `best_model/vocab.pkl`
+
+示例输入：
+
+```python
+texts = ["This movie is fantastic. The story is amazing.",
+         "This is the worst movie, I have ever watched.",
+         "The movie is acceptable, but nothing special."]
+```
+
+预测结果：
+
+```text
+Text:
+This movie is fantastic. The story is amazing.
+Prediction:
+positive
+Probability:
+0.9935
+
+Text:
+This is the worst movie, I have ever watched.
+Prediction:
+negative
+Probability:
+0.0045
+
+Text:
+The movie is acceptable, but nothing special.
+Prediction:
+negative
+Probability:
+0.2239
+```
